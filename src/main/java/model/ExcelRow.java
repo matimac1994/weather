@@ -126,4 +126,36 @@ public class ExcelRow {
     public void setMaxFunctionDecreaseDifferenceBetweenStartEndHour(String maxFunctionDecreaseDifferenceBetweenStartEndHour) {
         this.maxFunctionDecreaseDifferenceBetweenStartEndHour = maxFunctionDecreaseDifferenceBetweenStartEndHour;
     }
+
+    @Override
+    public String toString() {
+        return stationDayRow.toString() +
+                max + '\t' +
+                min + '\t' +
+                differenceMinMax + '\t' +
+                differenceMinMaxScope + '\t' +
+                maxFunctionGrowUp + '\t' +
+                maxFunctionGrowUpStartHour + '\t' +
+                maxFunctionGrowUpEndHour + '\t' +
+                maxFunctionGrowUpDifferenceBetweenStartEndHour + '\t' +
+                maxFunctionDecrease + '\t' +
+                maxFunctionDecreaseStartHour + '\t' +
+                maxFunctionDecreaseEndHour + '\t' +
+                maxFunctionDecreaseDifferenceBetweenStartEndHour + '\t';
+    }
+
+    public String toStringWithoutStation() {
+        return max + '\t' +
+                min + '\t' +
+                differenceMinMax + '\t' +
+                differenceMinMaxScope + '\t' +
+                maxFunctionGrowUp + '\t' +
+                maxFunctionGrowUpStartHour + '\t' +
+                maxFunctionGrowUpEndHour + '\t' +
+                maxFunctionGrowUpDifferenceBetweenStartEndHour + '\t' +
+                maxFunctionDecrease + '\t' +
+                maxFunctionDecreaseStartHour + '\t' +
+                maxFunctionDecreaseEndHour + '\t' +
+                maxFunctionDecreaseDifferenceBetweenStartEndHour + '\t';
+    }
 }

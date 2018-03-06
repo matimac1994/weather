@@ -2,6 +2,7 @@ package service;
 
 import model.*;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class CalculationServiceImpl implements CalculationService{
         double max, min, maxMinDifference, maxMinDifferenceTime;
         int hourPlusStart, hourPlusEnd, hourMinusStart, hourMinusEnd, howManyHoursPlus, howManyHoursMinus;
         int maxHourValue, minHourValue;
+
+        //set max and min number of digits after comma
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        df.setMinimumFractionDigits(2);
 
         // day increment on every 24hours loop
         for (int day = 0; day < hourData2002.size(); day++){
@@ -76,7 +82,7 @@ public class CalculationServiceImpl implements CalculationService{
                         if (functionDecrease < sumMinus){
                             functionDecrease = sumMinus;
                             hourMinusEnd = hour;
-                            hourPlusStart = hour - howManyHoursMinus;
+                            hourMinusStart = hour - howManyHoursMinus;
                         }
                         sumMinus = 0;
                         howManyHoursMinus=0;
@@ -105,23 +111,23 @@ public class CalculationServiceImpl implements CalculationService{
             if (maxHourValue < minHourValue){
                 //Requirement to show minus or plus values
                 maxMinDifference = maxMinDifference * (-1);
-                maxMinDifferenceString = String.valueOf(maxMinDifference);
+                maxMinDifferenceString = String.valueOf(df.format(maxMinDifference));
             } else {
-                maxMinDifferenceString = "+" + String.valueOf(maxMinDifference);
+                maxMinDifferenceString = "+" + String.valueOf(df.format(maxMinDifference));
             }
 
-            excelRow.setMax(String.valueOf(max));
-            excelRow.setMin(String.valueOf(min));
+            excelRow.setMax(String.valueOf(df.format(max)));
+            excelRow.setMin(String.valueOf(df.format(min)));
             excelRow.setDifferenceMinMax(String.valueOf(maxMinDifferenceString));
-            excelRow.setDifferenceMinMaxScope(String.valueOf(maxMinDifferenceTime));
-            excelRow.setMaxFunctionGrowUp(String.valueOf(functionGrowUp));
-            excelRow.setMaxFunctionDecrease(String.valueOf(functionDecrease));
-            excelRow.setMaxFunctionGrowUpStartHour(String.valueOf(hourPlusStart));
-            excelRow.setMaxFunctionGrowUpEndHour(String.valueOf(hourPlusEnd));
-            excelRow.setMaxFunctionDecreaseStartHour(String.valueOf(hourMinusStart));
-            excelRow.setMaxFunctionDecreaseEndHour(String.valueOf(hourMinusEnd));
-            excelRow.setMaxFunctionGrowUpDifferenceBetweenStartEndHour(String.valueOf(hourPlusEnd-hourPlusStart));
-            excelRow.setMaxFunctionDecreaseDifferenceBetweenStartEndHour(String.valueOf(hourMinusEnd-hourMinusStart));
+            excelRow.setDifferenceMinMaxScope(String.valueOf(df.format(maxMinDifferenceTime)));
+            excelRow.setMaxFunctionGrowUp(String.valueOf(df.format(functionGrowUp)));
+            excelRow.setMaxFunctionDecrease(String.valueOf(df.format(functionDecrease)));
+            excelRow.setMaxFunctionGrowUpStartHour(String.valueOf(df.format(hourPlusStart)));
+            excelRow.setMaxFunctionGrowUpEndHour(String.valueOf(df.format(hourPlusEnd)));
+            excelRow.setMaxFunctionDecreaseStartHour(String.valueOf(df.format(hourMinusStart)));
+            excelRow.setMaxFunctionDecreaseEndHour(String.valueOf(df.format(hourMinusEnd)));
+            excelRow.setMaxFunctionGrowUpDifferenceBetweenStartEndHour(String.valueOf(df.format(hourPlusEnd-hourPlusStart)));
+            excelRow.setMaxFunctionDecreaseDifferenceBetweenStartEndHour(String.valueOf(df.format(hourMinusEnd-hourMinusStart)));
 
             excelRows.add(excelRow);
 
